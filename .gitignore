@@ -1,0 +1,6 @@
+.env
+aienv/
+__pycache__/
+*.pyc
+*.pyo
+.git/
