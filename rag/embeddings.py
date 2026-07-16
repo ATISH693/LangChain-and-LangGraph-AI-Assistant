@@ -7,9 +7,10 @@ load_dotenv()
 
 MODEL_PATH = "/app/models/bge-small-en-v1.5"
 
-model = HuggingFaceEmbeddings( model_name=MODEL_PATH, model_kwargs={"device": "cpu"}, encode_kwargs = {"normalize_embeddings": True})
-
 def get_embedding_model():
+
+    model = HuggingFaceEmbeddings( model_name=MODEL_PATH, model_kwargs={"device": "cpu"}, encode_kwargs = {"normalize_embeddings": True})
+
     return model 
 
 
