@@ -1,12 +1,13 @@
 from dotenv import load_dotenv
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_core.documents import Document
+from pathlib import Path
 
 load_dotenv()
 
-model = HuggingFaceEmbeddings(
-        model_name="BAAI/bge-small-en-v1.5"
-    )
+MODEL_PATH = "/app/models/bge-small-en-v1.5"
+
+model = HuggingFaceEmbeddings( model_name=MODEL_PATH, model_kwargs={"device": "cpu"}, encode_kwargs = {"normalize_embeddings": True})
 
 def get_embedding_model():
     return model 
