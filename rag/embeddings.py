@@ -1,15 +1,19 @@
 from dotenv import load_dotenv
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_core.documents import Document
-from pathlib import Path
+import torch
+from functools import lru_cache
 
 load_dotenv()
+torch.set_num_threads(1)
 
 MODEL_PATH = "/app/models/bge-small-en-v1.5"
 
+
+@lru_cache(maxsize=1)
 def get_embedding_model():
 
-    model = HuggingFaceEmbeddings( model_name=MODEL_PATH, model_kwargs={"device": "cpu"}, encode_kwargs = {"normalize_embeddings": True})
+    model = HuggingFaceEmbeddings( model_name=MODEL_PATH, model_kwargs={"device": "cpu"}, encode_kwargs = {"normalize_embeddings": True, "batch_size": 1})
 
     return model 
 

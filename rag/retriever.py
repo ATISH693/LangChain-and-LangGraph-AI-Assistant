@@ -1,6 +1,6 @@
 from rag.vector_store import get_vector_store
 
-def similarity_search(query: str, k: int = 7):
+def similarity_search(query: str, k: int = 3):
     """
     Create a retriever from the PostgreSQL vector store.
     """
@@ -14,7 +14,7 @@ def similarity_search(query: str, k: int = 7):
     return retriever
 
 
-def retrieve(query: str, k : int = 7) -> tuple[list[dict], float]:
+def retrieve(query: str, k : int = 3) -> tuple[list[dict], float]:
     """
     Retrieve the most relevant document chunks.
     """
