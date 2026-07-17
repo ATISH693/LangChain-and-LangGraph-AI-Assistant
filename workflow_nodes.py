@@ -5,6 +5,8 @@ from requests.exceptions import ConnectionError, Timeout
 from groq import RateLimitError, AuthenticationError, APIConnectionError, APIStatusError
 from langgraph.types import interrupt
 from prompt import prompt
+import traceback
+
 
 final_prompt = prompt
 
@@ -30,13 +32,9 @@ def retrieve_docs(state: FlowState):
             "status": "retrieve",
         }
 
-    except Exception as e:
-        return {
-            "chunks": [],
-            "best_score": 99999,
-            "answer": f"Failed to retrieve documents.\n\n{str(e)}",
-            "status": "error",
-        }
+    except Exception:
+        traceback.print_exc()
+        raise
     
 THRESHOLD = 0.35
 
