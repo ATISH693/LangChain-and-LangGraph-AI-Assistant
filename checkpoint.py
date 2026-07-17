@@ -9,7 +9,7 @@ DB_URI = os.getenv("CHECKPOINT_DB_URL")
 
 def get_checkpointer():
 
-    context = PostgresSaver.from_conn_string(DB_URI)
+    context = PostgresSaver.from_conn_string(DB_URI, prepare_threshold=None)
 
     checkpointer = context.__enter__()
 
