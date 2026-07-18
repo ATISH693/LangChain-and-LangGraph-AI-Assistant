@@ -1,8 +1,10 @@
 # LangChain and LangGraph RAG AI Assistant
 
-A Retrieval Augmented Generation (RAG) AI Assistant built using LangGraph, LangChain, FastAPI, PostgreSQL, pgvector, Streamlit, Docker, and AWS EC2.
+A Retrieval Augmented Generation (RAG) AI Assistant designed to answer questions related to **LangChain and LangGraph documentation**.
 
-The application allows users to query a custom knowledge base, retrieves relevant documents using vector similarity search, generates context-aware responses using an LLM, and supports human-in-the-loop approval for uncertain responses.
+The application uses LangGraph, LangChain, FastAPI, PostgreSQL with pgvector, Streamlit, Docker, and AWS EC2 to build a stateful AI assistant that retrieves relevant documentation, generates context-aware answers, and uses human-in-the-loop approval for uncertain responses.
+
+The system is built over a custom knowledge base containing LangChain and LangGraph official documentation, allowing users to ask technical questions and receive answers grounded in the retrieved documentation.
 
 ---
 
