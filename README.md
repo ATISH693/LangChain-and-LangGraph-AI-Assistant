@@ -283,7 +283,7 @@ FastAPI Application
 | Backend | FastAPI |
 | Workflow | LangGraph |
 | Framework | LangChain |
-| LLM | Groq |
+| LLM | Groq Llama-3.3-70b-versatile |
 | Embeddings | HuggingFace BAAI/bge-small-en-v1.5 |
 | Database | PostgreSQL |
 | Vector Search | pgvector |
