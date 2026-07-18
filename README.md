@@ -63,7 +63,7 @@ If the retrieved information has low confidence, the workflow pauses and waits f
 
 # RAG Implementation
 
-# Knowledge Base
+## Knowledge Base
 
 The assistant is built using LangChain and LangGraph documentation as the knowledge source.
 
