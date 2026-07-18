@@ -12,9 +12,7 @@ The system is built over a custom knowledge base containing LangChain and LangGr
 
 [Streamlit App](https://langchain-and-langgraph-ai-assistant-ifqrqbl6f9unnw57pwc2rb.streamlit.app/)
 
-FastAPI Swagger Documentation:
-
-https://your-ec2-public-ip:8000/docs
+[FastAPI Swagger UI](http://16.171.68.41:8000/docs)
 
 ---
 
