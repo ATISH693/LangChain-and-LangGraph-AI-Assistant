@@ -63,6 +63,21 @@ If the retrieved information has low confidence, the workflow pauses and waits f
 
 # RAG Implementation
 
+# Knowledge Base
+
+The assistant is built using LangChain and LangGraph documentation as the knowledge source.
+
+Documents are:
+
+1. Loaded from documentation files
+2. Split into smaller chunks
+3. Converted into embeddings
+4. Stored in PostgreSQL using pgvector
+5. Retrieved using semantic similarity search
+
+The retrieved context is then passed to the LLM to generate accurate answers.
+
+
 The system uses a vector-based retrieval pipeline.
 
 Flow:
