@@ -1,4 +1,4 @@
-# LangGraph RAG AI Assistant
+# LangChain and LangGraph RAG AI Assistant
 
 A Retrieval Augmented Generation (RAG) AI Assistant built using LangGraph, LangChain, FastAPI, PostgreSQL, pgvector, Streamlit, Docker, and AWS EC2.
 
