@@ -291,27 +291,6 @@ FastAPI Application
 | Containerization | Docker |
 | Cloud | AWS EC2 |
 
----
-
-# Project Structure
-
-```
-.
-├── backend/
-│   ├── api/
-│   ├── graph/
-│   ├── retriever/
-│   ├── database/
-│   └── models/
-│
-├── frontend/
-│   ├── streamlit_app.py
-│   └── database_load.py
-│
-├── Dockerfile
-├── requirements.txt
-└── README.md
-```
 
 ---
 
