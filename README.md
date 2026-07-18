@@ -61,9 +61,8 @@ If the retrieved information has low confidence, the workflow pauses and waits f
 
 ---
 
-# RAG Implementation
 
-## Knowledge Base
+# Knowledge Base
 
 The assistant is built using LangChain and LangGraph documentation as the knowledge source.
 
@@ -76,38 +75,6 @@ Documents are:
 5. Retrieved using semantic similarity search
 
 The retrieved context is then passed to the LLM to generate accurate answers.
-
-
-The system uses a vector-based retrieval pipeline.
-
-Flow:
-
-```
-Documents
-    |
-    v
-Text Chunking
-    |
-    v
-Embedding Generation
-    |
-    v
-PostgreSQL + pgvector
-    |
-    v
-Similarity Search
-    |
-    v
-LLM Response Generation
-```
-
-Embedding Model:
-
-```
-BAAI/bge-small-en-v1.5
-```
-
-The embedding model runs locally inside the backend container.
 
 ---
 # Database Architecture
