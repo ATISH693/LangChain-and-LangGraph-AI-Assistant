@@ -93,10 +93,16 @@ BAAI/bge-small-en-v1.5
 The embedding model runs locally inside the backend container.
 
 ---
-
 # Database Architecture
 
-The application uses PostgreSQL for both vector storage and workflow persistence.
+The application uses a single PostgreSQL database hosted on Supabase.
+
+The database handles three major responsibilities:
+
+- Vector storage for RAG retrieval
+- LangGraph workflow persistence
+- User conversation history
+
 
 Database:
 
@@ -104,23 +110,67 @@ Database:
 PostgreSQL + pgvector
 ```
 
-Hosted on:
+---
 
-```
-Supabase
-```
+## Database Tables
 
-## Vector Database
-
-Used for storing document embeddings.
-
-Stores:
-
-| Column | Purpose |
+| Table | Purpose |
 |---|---|
-| Document Content | Original text chunks |
-| Embedding Vector | Numerical representation of text |
-| Metadata | Source information |
+| `langchain_pg_collections` | Stores PGVector collection information |
+| `langchain_pg_embeddings` | Stores document chunks, embeddings, and metadata for similarity search |
+| `checkpoints` | Stores LangGraph workflow checkpoints and thread state |
+| `checkpoint_blobs` | Stores serialized checkpoint data |
+| `checkpoint_writes` | Stores workflow state updates |
+| `chat_history` | Stores user messages, assistant responses, and conversation history |
+
+---
+
+## Vector Storage (RAG)
+
+The RAG pipeline uses PostgreSQL with the pgvector extension.
+
+Documents are processed as:
+
+```
+Documents
+    |
+    v
+Text Chunks
+    |
+    v
+Embedding Generation
+    |
+    v
+PostgreSQL pgvector
+    |
+    v
+Similarity Search
+    |
+    v
+Retrieved Context
+    |
+    v
+LLM Response
+```
+
+Embedding model:
+
+```
+BAAI/bge-small-en-v1.5
+```
+
+Stored in:
+
+```
+langchain_pg_embeddings
+```
+
+Contains:
+
+- Document chunks
+- Vector embeddings
+- Metadata
+- Collection references
 
 Used by:
 
@@ -128,21 +178,29 @@ Used by:
 LangChain PGVector Retriever
 ```
 
-for similarity search.
+for semantic similarity search.
 
 ---
 
-## LangGraph Checkpoint Database
+## LangGraph Workflow Persistence
 
-Stores workflow execution state.
+LangGraph uses PostgreSQL checkpoint storage to maintain workflow state.
+
+Tables:
+
+```
+checkpoints
+checkpoint_blobs
+checkpoint_writes
+```
 
 Stores:
 
-| Data | Purpose |
-|---|---|
-| Thread ID | Unique workflow session |
-| Checkpoints | Saved workflow state |
-| Interrupt State | Human approval status |
+- Thread IDs
+- Workflow execution state
+- Interrupt information
+- Human approval state
+- Resume checkpoints
 
 Implemented using:
 
@@ -151,36 +209,35 @@ langgraph-checkpoint-postgres
 PostgresSaver
 ```
 
+This allows workflows to pause and resume without losing execution state.
+
 ---
 
-## Chat History Database
+## Chat History Storage
 
-A separate table stores user conversations.
-
-Table:
+The Streamlit application uses a separate table in the same PostgreSQL database:
 
 ```
 chat_history
 ```
 
-Schema:
+Stores:
 
 | Column | Description |
 |---|---|
-| id | Message ID |
-| thread_id | Conversation identifier |
-| role | User / Assistant |
-| title | Question |
-| message | Chat content |
-| timestamp | Message time |
+| `id` | Unique message identifier |
+| `thread_id` | Conversation identifier |
+| `role` | User or assistant |
+| `title` | Question |
+| `message` | Message content |
+| `timestamp` | Message creation time |
 
-Used by Streamlit to:
+Used for:
 
-- Load previous conversations
-- Create new chats
-- Maintain chat sessions
-
----
+- Loading previous conversations
+- Maintaining chat sessions
+- Creating new chats
+- Displaying conversation history
 
 # LangGraph Workflow
 
